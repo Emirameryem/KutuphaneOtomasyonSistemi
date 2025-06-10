@@ -1,0 +1,29 @@
+﻿@model KütüphaneOtomasyon.Models.Member
+
+@{
+    ViewData["Title"] = "Kitap Geçmişi";
+}
+
+<h2>@Model.FullName - Kitap Geçmişi</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Kitap</th>
+            <th>Alındı</th>
+            <th>İade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model.Loans)
+        {
+            <tr>
+                <td>@loan.Book.Title</td>
+                <td>@loan.BorrowDate.ToShortDateString()</td>
+                <td>@(loan.ReturnDate?.ToShortDateString() ?? "Henüz iade edilmedi")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

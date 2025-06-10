@@ -1,0 +1,42 @@
+﻿@model IEnumerable<KütüphaneOtomasyon.Models.Member>
+
+@{
+    ViewData["Title"] = "Üye Listesi";
+}
+
+<h2>Üye Listesi</h2>
+
+<p>
+    @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-primary">Yeni Üye Ekle</a>
+    }
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ad Soyad</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model)
+        {
+            <tr>
+                <td>@member.FullName</td>
+                <td>@member.Email</td>
+                <td>@member.Role</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@member.Id" class="btn btn-sm btn-warning">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@member.Id" class="btn btn-sm btn-danger">Sil</a>
+                    <a asp-action="BookHistory" asp-route-id="@member.Id" class="btn btn-sm btn-info">Geçmiş</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
